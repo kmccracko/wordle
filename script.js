@@ -27,6 +27,7 @@ const winsStat = document.getElementById("s2");
 const curStat = document.getElementById("s3");
 const maxStat = document.getElementById("s4");
 const distribs = document.getElementsByClassName("distrib");
+const bground = document.getElementById("main-background");
 
 // functions
 function initGame() {
@@ -45,9 +46,9 @@ function initGame() {
       distribs[i].style.backgroundColor = "rgb(80 80 80)";
     }
     // hide answer in modal
-    correctWrapper.classList.add("hidden");
+    correctWrapper.classList.toggle("hidden");
     // hide play again in modal
-    resetBtn.classList.add("hidden");
+    resetBtn.classList.toggle("hidden");
     // hide modal's shadow
     modal.style.boxShadow = "0 3rem 5rem rgba(145, 255, 125, 0)";
     closeModal();
@@ -58,8 +59,372 @@ function initGame() {
   correctAns = fetchWord();
 }
 function fetchWord() {
-  const words = ["split", "prawn", "crimp", "bongo", "slide", "moods", "grape"];
-
+  const words = [
+    "split",
+    "prawn",
+    "crimp",
+    "bongo",
+    "slide",
+    "moods",
+    "grape",
+    "abuse",
+    "adult",
+    "agent",
+    "anger",
+    "apple",
+    "award",
+    "basis",
+    "beach",
+    "birth",
+    "block",
+    "blood",
+    "board",
+    "brain",
+    "bread",
+    "break",
+    "brown",
+    "buyer",
+    "cause",
+    "chain",
+    "chair",
+    "chest",
+    "chief",
+    "child",
+    "china",
+    "claim",
+    "class",
+    "clock",
+    "coach",
+    "coast",
+    "court",
+    "cover",
+    "cream",
+    "crime",
+    "cross",
+    "crowd",
+    "crown",
+    "cycle",
+    "dance",
+    "death",
+    "depth",
+    "doubt",
+    "draft",
+    "drama",
+    "dream",
+    "dress",
+    "drink",
+    "drive",
+    "earth",
+    "enemy",
+    "entry",
+    "error",
+    "event",
+    "faith",
+    "fault",
+    "field",
+    "fight",
+    "final",
+    "floor",
+    "focus",
+    "force",
+    "frame",
+    "frank",
+    "front",
+    "fruit",
+    "glass",
+    "grant",
+    "grass",
+    "green",
+    "group",
+    "guide",
+    "heart",
+    "henry",
+    "horse",
+    "hotel",
+    "house",
+    "image",
+    "index",
+    "input",
+    "issue",
+    "japan",
+    "jones",
+    "judge",
+    "knife",
+    "laura",
+    "layer",
+    "level",
+    "lewis",
+    "light",
+    "limit",
+    "lunch",
+    "major",
+    "march",
+    "match",
+    "metal",
+    "model",
+    "money",
+    "month",
+    "motor",
+    "mouth",
+    "music",
+    "night",
+    "noise",
+    "north",
+    "novel",
+    "nurse",
+    "offer",
+    "order",
+    "other",
+    "owner",
+    "panel",
+    "paper",
+    "party",
+    "peace",
+    "peter",
+    "phase",
+    "phone",
+    "piece",
+    "pilot",
+    "pitch",
+    "place",
+    "plane",
+    "plant",
+    "plate",
+    "point",
+    "pound",
+    "power",
+    "press",
+    "price",
+    "pride",
+    "prize",
+    "proof",
+    "queen",
+    "radio",
+    "range",
+    "ratio",
+    "reply",
+    "right",
+    "river",
+    "round",
+    "route",
+    "rugby",
+    "scale",
+    "scene",
+    "scope",
+    "score",
+    "sense",
+    "shape",
+    "share",
+    "sheep",
+    "sheet",
+    "shift",
+    "shirt",
+    "shock",
+    "sight",
+    "simon",
+    "skill",
+    "sleep",
+    "smile",
+    "smith",
+    "smoke",
+    "sound",
+    "south",
+    "space",
+    "speed",
+    "spite",
+    "sport",
+    "squad",
+    "staff",
+    "stage",
+    "start",
+    "state",
+    "steam",
+    "steel",
+    "stock",
+    "stone",
+    "store",
+    "study",
+    "stuff",
+    "style",
+    "sugar",
+    "table",
+    "taste",
+    "terry",
+    "theme",
+    "thing",
+    "title",
+    "total",
+    "touch",
+    "tower",
+    "track",
+    "trade",
+    "train",
+    "trend",
+    "trial",
+    "trust",
+    "truth",
+    "uncle",
+    "union",
+    "unity",
+    "value",
+    "video",
+    "visit",
+    "voice",
+    "waste",
+    "watch",
+    "water",
+    "while",
+    "white",
+    "whole",
+    "woman",
+    "world",
+    "youth",
+    "admit",
+    "adopt",
+    "agree",
+    "allow",
+    "alter",
+    "apply",
+    "argue",
+    "arise",
+    "avoid",
+    "begin",
+    "blame",
+    "bring",
+    "build",
+    "burst",
+    "carry",
+    "catch",
+    "check",
+    "clean",
+    "clear",
+    "climb",
+    "close",
+    "count",
+    "enjoy",
+    "enter",
+    "exist",
+    "guess",
+    "imply",
+    "laugh",
+    "learn",
+    "leave",
+    "marry",
+    "occur",
+    "prove",
+    "raise",
+    "reach",
+    "refer",
+    "relax",
+    "serve",
+    "shall",
+    "shoot",
+    "solve",
+    "speak",
+    "spend",
+    "split",
+    "stand",
+    "stick",
+    "teach",
+    "thank",
+    "think",
+    "throw",
+    "treat",
+    "worry",
+    "would",
+    "write",
+    "above",
+    "acute",
+    "alive",
+    "alone",
+    "angry",
+    "aware",
+    "awful",
+    "basic",
+    "black",
+    "blind",
+    "brave",
+    "brief",
+    "broad",
+    "cheap",
+    "civil",
+    "crazy",
+    "daily",
+    "dirty",
+    "early",
+    "empty",
+    "equal",
+    "exact",
+    "extra",
+    "faint",
+    "false",
+    "fifth",
+    "first",
+    "fresh",
+    "funny",
+    "giant",
+    "grand",
+    "great",
+    "gross",
+    "happy",
+    "harsh",
+    "heavy",
+    "human",
+    "ideal",
+    "inner",
+    "joint",
+    "large",
+    "legal",
+    "local",
+    "loose",
+    "lucky",
+    "magic",
+    "minor",
+    "moral",
+    "naked",
+    "nasty",
+    "naval",
+    "outer",
+    "plain",
+    "prime",
+    "prior",
+    "proud",
+    "quick",
+    "quiet",
+    "rapid",
+    "ready",
+    "roman",
+    "rough",
+    "royal",
+    "rural",
+    "sharp",
+    "sheer",
+    "short",
+    "silly",
+    "sixth",
+    "small",
+    "smart",
+    "solid",
+    "sorry",
+    "spare",
+    "steep",
+    "still",
+    "super",
+    "sweet",
+    "thick",
+    "third",
+    "tight",
+    "tough",
+    "upper",
+    "upset",
+    "urban",
+    "usual",
+    "vague",
+    "valid",
+    "vital",
+    "wrong",
+    "young",
+  ];
   return words[Math.floor(Math.random() * words.length)];
 }
 function typeFunc(e, action) {
@@ -81,6 +446,8 @@ function typeFunc(e, action) {
     }
     // enter
     else if (letter === "enter") {
+      // simulate a click to deselect any selected keys
+      bground.click();
       if (guessStr === "") return;
       submitGuess();
     }
@@ -142,6 +509,7 @@ function endGame(outcome) {
     stats.maxStreak =
       stats.curStreak > stats.maxStreak ? stats.curStreak : stats.maxStreak;
   } else {
+    game++;
     stats.curStreak = 0;
   }
   stats.gamesPlayed += 1;
@@ -150,7 +518,7 @@ function endGame(outcome) {
   correctLabel.textContent = correctAns;
   correctLabel.style.color =
     outcome === "win" ? "rgb(98 171 98)" : "rgb(255 101 101)";
-  correctWrapper.classList.remove("hidden");
+  correctWrapper.classList.toggle("hidden");
   modal.style.boxShadow =
     outcome === "win"
       ? "0rem 3rem 30rem rgba(145, 255, 125, 0.3)"
@@ -163,12 +531,12 @@ function endGame(outcome) {
   maxStat.textContent = stats.maxStreak;
 
   // show play again button
-  resetBtn.classList.remove("hidden");
+  resetBtn.classList.toggle("hidden");
   // show modal
   showModal();
 }
 function closeModal() {
-  modal.classList.add("hidden");
+  modal.classList.toggle("hidden");
 }
 function showModal() {
   // get highest part of win distribution to determine bar lengths
@@ -184,8 +552,14 @@ function showModal() {
       Math.trunc((distribs[i].textContent / maxDist) * 100) + 5
     }%`;
   }
-  modal.classList.remove("hidden");
+  // if game is active, shorten the modal
+  console.log(outcome, game);
+  if (outcome === "win" || game >= 6) {
+    modal.style.height = "550px";
+  } else modal.style.height = "400px";
+  modal.classList.toggle("hidden");
 }
+
 // event listeners
 statsBtn.addEventListener("click", showModal);
 resetBtn.addEventListener("click", initGame);
@@ -196,25 +570,36 @@ for (el of keys) {
   });
 }
 document.addEventListener("keydown", function (e) {
+  if (!modal.classList.contains("hidden")) {
+    if (e.key === "Escape") closeModal();
+    if (e.key === "Enter" && !resetBtn.classList.contains("hidden")) initGame();
+  }
   typeFunc(e, "press");
 });
 
-// endGame();
-// alt+semicolon gives emojis!
+// windows+semicolon gives emojis!
 
-/*        BUGS BUGS BUGS
+/*
+
+
+
+
+        BUGS BUGS BUGS
 after clicking on a key, if you start typing, the key stays selected
   -- simulate a click on the background somewhere?
 
-when winning a level early, you can keep making guesses
+✅ when winning a level early, you can keep making guesses
   -- set whatever "current" var that keeps track, to the end of itself
   -- or just check if game over when in typeFunc
 
 */
 
-/*        IDEAS IDEAS IDEAS
+/*
+        IDEAS IDEAS IDEAS
 add animation to "flip" tiles to a color as they're being guessed
   -- see Wordle, lol
+
+add animation to modal
 
 have a larger list of words to choose from
 

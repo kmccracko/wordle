@@ -23,8 +23,9 @@ button {
   background-color: rgb(94, 94, 94);
 }
 hr {
-  border-width: 1px;
+  border-width: 0.5px;
   border-color: rgb(255, 255, 255);
+  background-color: white;
   margin-bottom: 5%;
 }
 .grid-container {
