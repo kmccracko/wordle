@@ -9,7 +9,7 @@
   </head>
 
   <body style="background-color: rgb(20, 20, 20)">
-    <h1>W O R D L E</h1>
+    <h1>WORDLE</h1>
 
     
     <div class="grid-container">
@@ -94,6 +94,10 @@
     <div class="modal hidden">
       <button class="close-modal">&times;</button>
       <div id="modal-inner">
+        <div id = "correctAns-wrapper" class="hidden">
+          <div id = "correctAns"><hr /></div>
+          <hr />
+        </div>
         <h2 style="text-align: center;">Statistics</h2>
         <div class="stats-grid">
           <div class="stat" id = "s1" type="text" />0</div>
@@ -105,7 +109,7 @@
           <div class="stat-label" id = "sl3" type="text" />Current Streak</div>
           <div class="stat-label" id = "sl4" type="text" />Max Streak</div>
         </div>
-        <div style="text-align: center; margin-top: 20px;">Guess Distribution</div>
+        <div style="text-align: center; margin-top: 20px;">Win-Guess Distribution</div>
         <div class='distribution-grid'>
           <div class="distrib-label" id = "dl1" type="text" />1</div>
           <div class="distrib" id = "d1" type="text" />0</div>
@@ -120,7 +124,7 @@
           <div class="distrib-label" id = "dl6" type="text" />6</div>
           <div class="distrib" id = "d6" type="text" />0</div>
         </div>
-        <button class ="reset" id="resetBtn">Reset!</button>
+        <button class ="reset hidden" id="resetBtn">Play Again!</button>
       </div>
     </div>
 

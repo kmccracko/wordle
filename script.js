@@ -3,6 +3,7 @@ let guessStr;
 let game;
 let correctAns;
 let outcome;
+let validChars = "abcdefghijklmnopqrstuvwxyz".split("");
 const stats = {
   gamesPlayed: 0,
   wins: 0,
@@ -15,6 +16,8 @@ initGame();
 // elements
 const statsBtn = document.getElementById("statsBtn");
 const resetBtn = document.getElementById("resetBtn");
+const correctLabel = document.getElementById("correctAns");
+const correctWrapper = document.getElementById("correctAns-wrapper");
 const keys = document.getElementsByClassName("key");
 const gridItems = document.getElementsByClassName("box");
 const modal = document.querySelector(".modal");
@@ -39,8 +42,14 @@ function initGame() {
     }
     // set all stat bars grey
     for (let i = 0; i < stats.spread.length; i++) {
-      distribs[i].style.backgroundColor = "rgb(80, 80, 80)";
+      distribs[i].style.backgroundColor = "rgb(80 80 80)";
     }
+    // hide answer in modal
+    correctWrapper.classList.add("hidden");
+    // hide play again in modal
+    resetBtn.classList.add("hidden");
+    // hide modal's shadow
+    modal.style.boxShadow = "0 3rem 5rem rgba(145, 255, 125, 0)";
     closeModal();
   }
   outcome = "loss";
@@ -53,19 +62,33 @@ function fetchWord() {
 
   return words[Math.floor(Math.random() * words.length)];
 }
-function typeFunc() {
-  if (game < 6) {
-    if (this.id === "backspace") {
+function typeFunc(e, action) {
+  if (game < 6 && outcome !== "win") {
+    // normalize type
+    let letter;
+    if (action === "click") {
+      letter = e.id;
+    }
+    if (action === "press") {
+      letter = e.key.toLowerCase();
+    }
+
+    // backspace
+    if (letter === "backspace") {
       if (guessStr === "") return;
       gridItems[game * 5 + guessStr.length - 1].textContent = "";
       guessStr = guessStr.slice(0, guessStr.length - 1);
-    } else if (this.id === "enter") {
+    }
+    // enter
+    else if (letter === "enter") {
       if (guessStr === "") return;
       submitGuess();
-    } else {
+    }
+    // letter characters
+    else if (validChars.includes(letter)) {
       if (guessStr.length < 5) {
-        gridItems[game * 5 + guessStr.length].textContent = this.id;
-        guessStr += this.id;
+        gridItems[game * 5 + guessStr.length].textContent = letter;
+        guessStr += letter;
       }
     }
   }
@@ -84,7 +107,6 @@ function submitGuess() {
 }
 function checkGuess(guess) {
   // loop through guess letters
-  console.log(guess.length);
   for (let i = 0; i < guess.length; i++) {
     curBox = document.getElementById(`r${game + 1}c${i + 1}`);
     let letter = guess[i];
@@ -124,12 +146,24 @@ function endGame(outcome) {
   }
   stats.gamesPlayed += 1;
 
+  // update text and color, then show correctLabel
+  correctLabel.textContent = correctAns;
+  correctLabel.style.color =
+    outcome === "win" ? "rgb(98 171 98)" : "rgb(255 101 101)";
+  correctWrapper.classList.remove("hidden");
+  modal.style.boxShadow =
+    outcome === "win"
+      ? "0rem 3rem 30rem rgba(145, 255, 125, 0.3)"
+      : "0rem 3rem 30rem rgba(255, 138, 138, 0.3)";
+
   // update modal stats
   gamesStat.textContent = stats.gamesPlayed;
   winsStat.textContent = Math.trunc((stats.wins / stats.gamesPlayed) * 100);
   curStat.textContent = stats.curStreak;
   maxStat.textContent = stats.maxStreak;
 
+  // show play again button
+  resetBtn.classList.remove("hidden");
   // show modal
   showModal();
 }
@@ -157,8 +191,35 @@ statsBtn.addEventListener("click", showModal);
 resetBtn.addEventListener("click", initGame);
 closeModalBtn.addEventListener("click", closeModal);
 for (el of keys) {
-  el.addEventListener("click", typeFunc);
+  el.addEventListener("click", function () {
+    typeFunc(this, "click");
+  });
 }
+document.addEventListener("keydown", function (e) {
+  typeFunc(e, "press");
+});
 
 // endGame();
 // alt+semicolon gives emojis!
+
+/*        BUGS BUGS BUGS
+after clicking on a key, if you start typing, the key stays selected
+  -- simulate a click on the background somewhere?
+
+when winning a level early, you can keep making guesses
+  -- set whatever "current" var that keeps track, to the end of itself
+  -- or just check if game over when in typeFunc
+
+*/
+
+/*        IDEAS IDEAS IDEAS
+add animation to "flip" tiles to a color as they're being guessed
+  -- see Wordle, lol
+
+have a larger list of words to choose from
+
+reject invalid words
+
+add emojis hehe
+
+*/

@@ -1,4 +1,5 @@
 h1 {
+  letter-spacing: 12px;
   font-size: 225%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: rgb(255, 255, 255);
@@ -19,9 +20,13 @@ button {
   height: 45px;
   width: 35px;
   color: white;
-  background-color: rgb(136, 136, 136);
+  background-color: rgb(94, 94, 94);
 }
-
+hr {
+  border-width: 1px;
+  border-color: rgb(255, 255, 255);
+  margin-bottom: 5%;
+}
 .grid-container {
   margin: auto;
   width: 240px;
@@ -33,7 +38,7 @@ button {
   font-weight: bold;
   font-size: 140%;
   text-align: center;
-  text-transform: capitalize;
+  text-transform: uppercase;
   border: 1.5px solid rgb(66, 66, 66);
   background-color: rgb(20, 20, 20);
   color: white;
@@ -68,13 +73,13 @@ button {
 .distribution-grid {
   /* margin: auto; */
   /* width: 100%; */
-  margin-top: 10px;
   padding-top: 5%;
   display: grid;
   grid-template-columns: 5% 85%;
 }
 
 .distrib {
+  padding-right: 5px;
   margin-bottom: 5px;
   background-color: rgb(80, 80, 80);
   text-align: right;
@@ -95,7 +100,7 @@ button {
   background-color: rgb(63, 63, 63);
   font-size: 150%;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 5%;
   margin-left: 15%;
   width: 70%; /*40 boxwidth * 6 boxcount*/
 }
@@ -125,29 +130,45 @@ button {
   border: 1.5px solid rgb(68, 116, 68);
 }
 .wrong {
-  background-color: rgb(77, 77, 77);
-  border: 1.5px solid rgb(77, 77, 77);
+  background-color: rgb(56, 56, 56);
+  border: 1.5px solid rgb(56, 56, 56);
 }
 
-.hidden {
-  display: none;
-}
 .modal {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 450px;
-  height: 475px;
+  height: 550px;
 
   color: white;
   background-color: rgb(34, 34, 34);
   border-radius: 10px;
-  box-shadow: 0 3rem 5rem rgba(255, 138, 138, 0.3);
+  box-shadow: 0 3rem 5rem rgba(255, 138, 138, 0);
 }
 .close-modal {
+  height: 5%;
   border: none;
   font-size: 150%;
   color: rgb(150, 150, 150);
   background-color: transparent;
+}
+.hidden {
+  display: none;
+}
+
+#correctAns {
+  height: 20%;
+  font-size: 150%;
+  letter-spacing: 7px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+/* just testing something here, not in use */
+.shadow {
+  box-shadow: 0 3rem 5rem rgba(255, 138, 138, 0.3);
 }
