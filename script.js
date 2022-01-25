@@ -601,10 +601,8 @@ add animation to "flip" tiles to a color as they're being guessed
 
 add animation to modal
 
-have a larger list of words to choose from
+✅ have a larger list of words to choose from
 
 reject invalid words
-
-add emojis hehe
 
 */
