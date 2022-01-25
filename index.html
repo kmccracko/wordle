@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Worldle!</title>
+    <link rel="stylesheet" href="styleSheet.css" />
+  </head>
+
+  <body style="background-color: rgb(20, 20, 20)">
+    <h1>W O R D L E</h1>
+
+    
+    <div class="grid-container">
+      <div class="box" id = "r1c1" type="text" /></div>
+      <div class="box" id = "r1c2" type="text" /></div>
+      <div class="box" id = "r1c3" type="text" /></div>
+      <div class="box" id = "r1c4" type="text" /></div>
+      <div class="box" id = "r1c5" type="text" /></div>
+      <div class="box" id = "r2c1" type="text" /></div>
+      <div class="box" id = "r2c2" type="text" /></div>
+      <div class="box" id = "r2c3" type="text" /></div>
+      <div class="box" id = "r2c4" type="text" /></div>
+      <div class="box" id = "r2c5" type="text" /></div>
+      <div class="box" id = "r3c1" type="text" /></div>
+      <div class="box" id = "r3c2" type="text" /></div>
+      <div class="box" id = "r3c3" type="text" /></div>
+      <div class="box" id = "r3c4" type="text" /></div>
+      <div class="box" id = "r3c5" type="text" /></div>
+      <div class="box" id = "r4c1" type="text" /></div>
+      <div class="box" id = "r4c2" type="text" /></div>
+      <div class="box" id = "r4c3" type="text" /></div>
+      <div class="box" id = "r4c4" type="text" /></div>
+      <div class="box" id = "r4c5" type="text" /></div>
+      <div class="box" id = "r5c1" type="text" /></div>
+      <div class="box" id = "r5c2" type="text" /></div>
+      <div class="box" id = "r5c3" type="text" /></div>
+      <div class="box" id = "r5c4" type="text" /></div>
+      <div class="box" id = "r5c5" type="text" /></div>
+      <div class="box" id = "r6c1" type="text" /></div>
+      <div class="box" id = "r6c2" type="text" /></div>
+      <div class="box" id = "r6c3" type="text" /></div>
+      <div class="box" id = "r6c4" type="text" /></div>
+      <div class="box" id = "r6c5" type="text" /></div>
+    </div>
+
+
+    <div id = "keyboard">
+      <div class="row">
+        <button class="key" id="q">Q</button>
+        <button class="key" id="w">W</button>
+        <button class="key" id="e">E</button>
+        <button class="key" id="r">R</button>
+        <button class="key" id="t">T</button>
+        <button class="key" id="y">Y</button>
+        <button class="key" id="u">U</button>
+        <button class="key" id="i">I</button>
+        <button class="key" id="o">O</button>
+        <button class="key" id="p">P</button>
+      </div>
+      <div class="row">
+        <div style="display:inline-block; width: 10px;"></div>
+        <button class="key" id="a">A</button>
+        <button class="key" id="s">S</button>
+        <button class="key" id="d">D</button>
+        <button class="key" id="f">F</button>
+        <button class="key" id="g">G</button>
+        <button class="key" id="h">H</button>
+        <button class="key" id="j">J</button>
+        <button class="key" id="k">K</button>
+        <button class="key" id="l">L</button>
+        <button class="key" id="enter" style=" width:65px">enter</button>
+      </div>
+      <div class="row">
+        <div style="display:inline-block; width: 35px;"></div>
+        <button class="key" id="z">Z</button>
+        <button class="key" id="x">X</button>
+        <button class="key" id="c">C</button>
+        <button class="key" id="v">V</button>
+        <button class="key" id="b">B</button>
+        <button class="key" id="n">N</button>
+        <button class="key" id="m">M</button>
+        <button class="key" id="backspace" style="width:30px">&lt;</button>
+      </div>
+    </div>
+
+
+    <div class="bottomStuff">
+      <button class="stats" id = "statsBtn">View Stats</button>
+    </div>
+    </div>
+
+    <div class="modal hidden">
+      <button class="close-modal">&times;</button>
+      <div id="modal-inner">
+        <h2 style="text-align: center;">Statistics</h2>
+        <div class="stats-grid">
+          <div class="stat" id = "s1" type="text" />0</div>
+          <div class="stat" id = "s2" type="text" />0</div>
+          <div class="stat" id = "s3" type="text" />0</div>
+          <div class="stat" id = "s4" type="text" />0</div>
+          <div class="stat-label" id = "sl1" type="text" />Played</div>
+          <div class="stat-label" id = "sl2" type="text" />Win %</div>
+          <div class="stat-label" id = "sl3" type="text" />Current Streak</div>
+          <div class="stat-label" id = "sl4" type="text" />Max Streak</div>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">Guess Distribution</div>
+        <div class='distribution-grid'>
+          <div class="distrib-label" id = "dl1" type="text" />1</div>
+          <div class="distrib" id = "d1" type="text" />0</div>
+          <div class="distrib-label" id = "dl2" type="text" />2</div>
+          <div class="distrib" id = "d2" type="text" />0</div>
+          <div class="distrib-label" id = "dl3" type="text" />3</div>
+          <div class="distrib" id = "d3" type="text" style="grid-column: 60px" />0</div>
+          <div class="distrib-label" id = "dl4" type="text" />4</div>
+          <div class="distrib" id = "d4" type="text" />0</div>
+          <div class="distrib-label" id = "dl5" type="text" />5</div>
+          <div class="distrib" id = "d5" type="text" />0</div>
+          <div class="distrib-label" id = "dl6" type="text" />6</div>
+          <div class="distrib" id = "d6" type="text" />0</div>
+        </div>
+        <button class ="reset" id="resetBtn">Reset!</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
