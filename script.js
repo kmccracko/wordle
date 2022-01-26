@@ -3,13 +3,18 @@ let guessStr;
 let game;
 let correctAns;
 let outcome;
-let validChars = "abcdefghijklmnopqrstuvwxyz".split("");
-const stats = {
+const validChars = "abcdefghijklmnopqrstuvwxyz".split("");
+let stats = {
   gamesPlayed: 0,
   wins: 0,
   curStreak: 0,
   maxStreak: 0,
-  spread: [0, 0, 0, 0, 0, 0],
+  s0: 0,
+  s1: 0,
+  s2: 0,
+  s3: 0,
+  s4: 0,
+  s5: 0,
 };
 initGame();
 
@@ -29,7 +34,27 @@ const maxStat = document.getElementById("s4");
 const distribs = document.getElementsByClassName("distrib");
 const bground = document.getElementById("main-background");
 
+// deleting cookies, call deleteCookies(statCookies) to clear progress
+statCookies = [
+  "gamesPlayed",
+  "wins",
+  "curStreak",
+  "maxStreak",
+  "s0",
+  "s1",
+  "s2",
+  "s3",
+  "s4",
+  "s5",
+];
+
 // functions
+function deleteCookies(cookiesArr) {
+  for (cookieName of cookiesArr) {
+    document.cookie = `${cookieName}= ; expires = Thu, 01 Jan 1970 00:00:00 GMT`;
+  }
+  return document.cookie;
+}
 function initGame() {
   if (stats.gamesPlayed > 0) {
     // set all blocks gray and clear letters
@@ -42,7 +67,7 @@ function initGame() {
       el.setAttribute("class", "key");
     }
     // set all stat bars grey
-    for (let i = 0; i < stats.spread.length; i++) {
+    for (let i = 0; i < 6; i++) {
       distribs[i].style.backgroundColor = "rgb(80 80 80)";
     }
     // hide answer in modal
@@ -53,6 +78,30 @@ function initGame() {
     modal.style.boxShadow = "0 3rem 5rem rgba(145, 255, 125, 0)";
     closeModal();
   }
+
+  // check for cookies!
+  // if no cookies, create them!
+  if (document.cookie === "") {
+    for (let key in stats) {
+      document.cookie = `${key}=${String(stats[key])}`;
+    }
+    console.log("cookies initialized");
+  }
+  // if cookies, and this is first game of session, set stats to cookies
+  else if (stats.gamesPlayed === 0) {
+    stats = document.cookie
+      .split(";")
+      .map((cookie) => cookie.split("="))
+      .reduce(
+        (accumulator, [key, value]) => ({
+          ...accumulator,
+          [key.trim()]: Number(decodeURIComponent(value)),
+        }),
+        {}
+      );
+  }
+  console.log("cookies: ", document.cookie);
+
   outcome = "loss";
   guessStr = "";
   game = 0;
@@ -504,7 +553,7 @@ function endGame(outcome) {
   // update stats object
   if (outcome === "win") {
     stats.wins += 1;
-    stats.spread[game] += 1;
+    stats[`s${game}`] += 1;
     stats.curStreak += 1;
     stats.maxStreak =
       stats.curStreak > stats.maxStreak ? stats.curStreak : stats.maxStreak;
@@ -513,6 +562,11 @@ function endGame(outcome) {
     stats.curStreak = 0;
   }
   stats.gamesPlayed += 1;
+
+  // update cookies
+  for (let key in stats) {
+    document.cookie = `${key} = ${String(stats[key])}`;
+  }
 
   // update text and color, then show correctLabel
   correctLabel.textContent = correctAns;
@@ -540,12 +594,19 @@ function closeModal() {
 }
 function showModal() {
   // get highest part of win distribution to determine bar lengths
-  let maxDist = Math.max(...stats.spread);
+  let maxDist = Math.max(
+    stats.s0,
+    stats.s1,
+    stats.s2,
+    stats.s3,
+    stats.s4,
+    stats.s5
+  );
   if (maxDist === 0) maxDist = 1;
 
   // update dist numbers, highlight current, update widths
-  for (let i = 0; i < stats.spread.length; i++) {
-    distribs[i].textContent = stats.spread[i];
+  for (let i = 0; i < 6; i++) {
+    distribs[i].textContent = stats[`s${i}`];
     if (outcome === "win" && i === game)
       distribs[i].style.backgroundColor = "rgb(68, 116, 68";
     distribs[i].style.width = `${
@@ -553,7 +614,6 @@ function showModal() {
     }%`;
   }
   // if game is active, shorten the modal
-  console.log(outcome, game);
   if (outcome === "win" || game >= 6) {
     modal.style.height = "550px";
   } else modal.style.height = "400px";
@@ -576,8 +636,6 @@ document.addEventListener("keydown", function (e) {
   }
   typeFunc(e, "press");
 });
-
-// windows+semicolon gives emojis!
 
 /*
 
@@ -604,5 +662,18 @@ add animation to modal
 ✅ have a larger list of words to choose from
 
 reject invalid words
+
+
+✅CURRENTLY: ::: 
+  -- working on implementing cookies to keep progress
+    - no need for stats object we use currently?
+
+    (i think this should be within a function that runs at init)
+    - if document.cookie = '' , we know this is the first game ever, so we then create all cookies to 0
+    - else, we should assume all the necessary cookies exist
+      - read these cookies into a js object (stats) that we'll refer to for everything
+      - when updating stats, also update the cookies
+        - i'm thinking it's way easier to update cookies than to read them (document.cookie = 'existingName=updatedValue')
+        - that's why we're reading them only on init. function only runs once per session and checks for existing cookies.
 
 */
